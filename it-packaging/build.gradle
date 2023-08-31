@@ -1,0 +1,8 @@
+plugins {
+    id 'war'
+}
+
+dependencies {
+
+    implementation project(path: ':base', configuration: 'integrationTest')
+}

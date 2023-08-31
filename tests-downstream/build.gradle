@@ -1,0 +1,14 @@
+plugins {
+    id 'java-library'
+}
+
+dependencies {
+    implementation project(path: ':base')
+
+    // These dependencies need to be repeated in this setup
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.3.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
+
+    // now depending on the custom configuration not on the actual test-set
+    testImplementation project(path: ':base', configuration: 'tests')
+}

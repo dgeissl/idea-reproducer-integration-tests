@@ -1,0 +1,23 @@
+plugins {
+    id 'java-library'
+    id 'org.unbroken-dome.test-sets' version '4.0.0'
+}
+
+testSets {
+    integrationTest {
+        createArtifact = true
+        classifier = "tests"
+    }
+}
+
+// creating a custom configuration only for the distribution of the integration tests
+configurations.register('tests')
+artifacts.add('tests', tasks.integrationTestJar)
+
+dependencies {
+    // These dependencies will be available in integration tests as well as unit tests
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.3.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
+}
+
+tasks.withType(Test).configureEach { it.useJUnitPlatform() }
